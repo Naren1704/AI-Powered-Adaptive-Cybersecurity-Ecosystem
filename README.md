@@ -65,6 +65,7 @@ Contributions, ideas, and bug reports are welcome! Feel free to fork the project
 ## 📧 Contact
 
 Narendren S V - narendren2006@gmail.com
+Murugavel J - 
 
 Project Link: https://github.com/Naren1704/AI-Powered-Adaptive-Cybersecurity-Ecosystem
 
