@@ -1,0 +1,91 @@
+# Phishing Detection Configuration
+# For VIGIL Agent - Project Chimera
+
+version: "1.0.0"
+last_updated: "2024-01-15"
+
+# Model Configuration
+models:
+  url_model: "url_model/new_phishing_model.pkl"
+  email_model: "email_model/phishing_email_classifier.pkl"
+  feature_columns: "url_model/new_feature_columns.pkl"
+  tld_encoder: "url_model/new_tld_encoder.pkl"
+
+# Detection Thresholds
+thresholds:
+  url_phishing: 0.35
+  email_phishing: 0.35
+  risk_score_critical: 80
+  risk_score_high: 60
+  risk_score_medium: 40
+  risk_score_low: 20
+
+# Feature Configuration
+features:
+  max_url_length: 2048
+  min_url_length: 5
+  max_email_length: 10000
+  update_frequency: "weekly"  # How often to update keyword lists
+
+# Risk Scoring
+scoring:
+  base_weight: 0.6
+  tld_weight: 0.1
+  keyword_weight: 0.15
+  structure_weight: 0.1
+  pattern_weight: 0.05
+
+# High-Risk TLDs (auto-updated)
+high_risk_tlds:
+  - xyz
+  - cc
+  - tk
+  - ml
+  - ga
+  - cf
+  - gq
+  - top
+  - loan
+  - win
+  - bid
+  - date
+
+# Phishing Keywords (auto-updated)
+phishing_keywords:
+  - login
+  - verify
+  - account
+  - secure
+  - password
+  - bank
+  - payment
+  - urgent
+  - free
+  - gift
+
+# Performance Settings
+performance:
+  batch_size: 100
+  cache_size: 1000
+  cache_ttl: 3600  # seconds
+  timeout: 5  # seconds per prediction
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  file: "logs/phishing_detector.log"
+  max_size: "10MB"
+  backup_count: 5
+
+# Integration Settings
+integration:
+  api_endpoint: "/api/v1/phishing/detect"
+  webhook_url: ""  # For real-time alerts
+  sync_interval: 300  # Sync with other agents every 5 minutes
+
+# Security Settings
+security:
+  sanitize_input: true
+  max_requests_per_minute: 100
+  require_authentication: false
+  encrypt_sensitive_data: true
