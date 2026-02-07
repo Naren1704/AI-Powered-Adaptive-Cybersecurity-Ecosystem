@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Chimera Dashboard</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+    font-family: Arial;
+    background: #0b1c2c;
+    color: white;
+    text-align: center;
+}
+
+.card {
+    background: #132f4c;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+    </style>
+</head>
+
+<body>
+<h1>Project Chimera - Cybersecurity Dashboard</h1>
+
+<div class="card">
+    <h2>System Status</h2>
+    <p id="status">Loading...</p>
+</div>
+
+<div class="card">
+    <h2>Active Threats</h2>
+    <ul id="threats"></ul>
+</div>
+
+<div class="card">
+    <h2>Resolved Incidents</h2>
+    <ul id="resolved"></ul>
+</div>
+
+<script >
+    async function loadData() {
+    const res = await fetch('/api/status');
+    const data = await res.json();
+
+    document.getElementById('status').innerText = data.systemStatus;
+
+    const threats = document.getElementById('threats');
+    threats.innerHTML = "";
+    data.activeThreats.forEach(t => {
+        let li = document.createElement('li');
+        li.innerText = t;
+        threats.appendChild(li);
+    });
+
+    const resolved = document.getElementById('resolved');
+    resolved.innerHTML = "";
+    data.resolved.forEach(r => {
+        let li = document.createElement('li');
+        li.innerText = r;
+        resolved.appendChild(li);
+    });
+}
+
+setInterval(loadData, 3000);
+loadData();
+
+
+</script>
+</body>
+</html>
